@@ -30,3 +30,11 @@ const addVideoStream = (video, stream) => {
 }
 
 socket.emit('join-room', ROOM_ID)
+
+socket.on('user-connected', () => {
+  connectToNewUser()
+})
+
+const connectToNewUser = () => {
+  console.log('New User Connected')
+}
