@@ -1,3 +1,5 @@
+const socket = io('/')
+
 const videoGrid = document.getElementById('video-grid')
 
 const myVideo = document.createElement('video')
@@ -26,3 +28,5 @@ const addVideoStream = (video, stream) => {
   // Add this video to the video grid
   videoGrid.append(video)
 }
+
+socket.emit('join-room', ROOM_ID)
