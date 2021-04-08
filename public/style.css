@@ -36,3 +36,34 @@ video {
     justify-content: center;
     align-items: center;
 }
+
+.main__controls {
+    display: flex;
+    background-color: #1c1e20;
+    color: #D2D2D2;
+    padding: 5px;
+    justify-content: space-between;
+}
+
+.main__controls__block {
+    display: flex;
+    flex: 0.15;
+}
+
+.main__controls__button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:8px, 10px;
+    min-width: 80px;
+    cursor: pointer;
+}
+.leave_meeting {
+    text-align: center;
+    color: #EB534B;
+}
+.main__controls__button:hover {
+    background-color: #343434;
+    border-radius: 5px;
+}
