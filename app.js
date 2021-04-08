@@ -11,7 +11,7 @@ const peerServer = ExpressPeerServer(server, {
 
 const io = require('./socket').init(server)
 
-app.user('/peerjs', peerServer)
+app.use('/peerjs', peerServer)
 
 app.use(express.static(path.join(__dirname, 'public')))
 

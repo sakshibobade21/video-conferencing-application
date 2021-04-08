@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --delay 500ms app.js"
+    "start": "nodemon --delay 1000ms app.js",
+    "kill": "pkill -f nodejs"
   },
   "author": "",
   "license": "ISC",
