@@ -24,6 +24,12 @@ navigator.mediaDevices.getUserMedia({
   addVideoStream(myVideo, myVideoStream)
 })
 
+// Listen on the peer connection
+// This event is triggered when we successfully connect to the peer server
+peer.on('open', userId => {
+  socket.emit('join-room', ROOM_ID, userId)
+})
+
 socket.on('user-connected', (userId) => {
   connectToNewUser(userId, myVideoStream)
 })
@@ -48,12 +54,6 @@ const addVideoStream = (video, stream) => {
   videoGrid.append(video)
 }
 
-// Listen on the peer connection
-// This event is triggered when we successfully connect to the peer server
-peer.on('open', userId => {
-  socket.emit('join-room', ROOM_ID, userId)
-})
-
 // Other users will call the newly added user and send the stream
 const connectToNewUser = (userId, stream) => {
   const call = peer.call(userId, stream)
@@ -61,4 +61,21 @@ const connectToNewUser = (userId, stream) => {
   call.on('stream', userVideoStream => {
     addVideoStream(video, userVideoStream)
   })
+}
+let text = $("input")
+
+$('html').keydown(function (e) {
+  if (e.which === 13 && text.val().length !== 0) {
+    console.log(text.val())
+    socket.emit('message', text.val())
+    text.val('')
+  }
+})
+socket.on('createMessage', message => {
+  $('ul').append(`<li class='message'><b>user</b><br/>${message}</li>`)
+  scrollToBottom()
+})
+
+const scrollToBottom = () => {
+  let d = $('.main__chat_window')
 }
