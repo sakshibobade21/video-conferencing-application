@@ -10,6 +10,8 @@ let peer = new Peer(undefined, {
   port: '3000'
 })
 
+const peers = {}
+
 const myVideo = document.createElement('video')
 myVideo.muted = true
 
@@ -34,6 +36,10 @@ socket.on('user-connected', (userId) => {
   connectToNewUser(userId, myVideoStream)
 })
 
+socket.on('user-disconnected', (userId) => {
+  if (peers[userId]) peers[userId].close()
+})
+
 const addVideoStream = (video, stream) => {
   // Display the video so user can see himself
   video.srcObject = stream
@@ -52,6 +58,11 @@ const connectToNewUser = (userId, stream) => {
   call.on('stream', userVideoStream => {
     addVideoStream(video, userVideoStream)
   })
+  call.on('close', () => {
+    video.remove()
+  })
+
+  peers[userId] = call
 }
 
 // Newly added user will answer the call and send the stream
